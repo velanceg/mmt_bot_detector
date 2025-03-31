@@ -1,9 +1,9 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, TimestampType
-from bot_detector import detect_bots
-from redis_sink import write_to_redis
-from hdfs_sink import write_to_hdfs
-from ..config.config_loader import REDIS_HOST, REDIS_PORT, ACTIVITY_THRESHOLD, HDFS_PATH
+from src.main.streaming.bot_detector import detect_bots
+from src.main.streaming.redis_sink import write_to_redis
+from src.main.streaming.hdfs_sink import write_to_hdfs
+from src.main.config.config_loader import REDIS_HOST, REDIS_PORT, ACTIVITY_THRESHOLD, HDFS_PATH
 
 
 def main():
