@@ -3,9 +3,13 @@ from pyspark.sql import DataFrame
 
 def write_to_hdfs(df: DataFrame, hdfs_path: str):
     """
-    Write bot user data to HDFS in Parquet format.
+    Write bot user IDs to HDFS in append mode.
     """
-    df.writeStream.format("parquet") \
+    query = df.writeStream \
+        .format("csv") \
         .option("path", hdfs_path) \
-        .option("checkpointLocation", f"{hdfs_path}/_checkpoint") \
+        .option("checkpointLocation", hdfs_path + "/checkpoint") \
+        .outputMode("append") \
         .start()
+
+    return query
